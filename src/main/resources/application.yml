@@ -1,0 +1,18 @@
+server:
+  port: 7004
+spring:
+  profiles:
+    active: @profile.active@
+  #    active: local
+  application:
+    name: service-rpc-tron #应用名称后缀需要改成币种单位，小写
+
+logging:
+  file:
+    name: "/data/logs/trx-token/info.log"
+  level:
+    org:
+      springframework:
+        security: ERROR
+    com:
+      ztuo: INFO
