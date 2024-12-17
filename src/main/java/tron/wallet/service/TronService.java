@@ -24,6 +24,7 @@ import org.tron.utils.TronUtils;
 import org.web3j.utils.Convert;
 
 import tron.wallet.entity.Coin;
+import tron.wallet.util.AES;
 import tron.wallet.util.Wallet;
 
 @Slf4j
@@ -33,14 +34,40 @@ public class TronService {
 
   @Autowired private Coin coin;
   @Autowired private TronApi tronApi;
-
+  
   public String getWithdrawAddress() {
     Wallet wallet = Wallet.loadWallet(coin.getKeystorePath() + coin.getWithdrawWallet());
     return TronUtils.getAddressByPrivateKey(wallet.getPrivateKey());
   }
   
+  private static String getWalletFileName(String address) {
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("'UTC--'yyyy-MM-dd'T'HH-mm-ss.nVV'--'");
+    ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
+    return now.format(format) + address + ".json";
+  }
+
   public long getHeight() throws IOException{
     return tronApi.getHeight();
+  }
+
+  public String createNewWallet(String account, String password) throws Exception {
+    // "address", "hexAddress", "privateKey"
+    Map<String, String> r = TronApi.createAddress();
+    String hashSalt = AES.HashAndSalt(password.getBytes(StandardCharsets.UTF_8));
+    String encPriKey = AES.encryptAes(r.get("privateKey"), hashSalt);
+    r.put("privateKey", encPriKey);
+    r.put("user", password);
+    String address = r.get("address");
+    String fileName = getWalletFileName(address);
+
+    String keyStorePath = coin.getKeystorePath();
+    File destination = new File(keyStorePath, fileName);
+    destination.createNewFile();
+    FileWriter output = new FileWriter(destination);
+    output.write(JSON.toJSONString(r));
+    output.close();
+
+    return address;
   }
 
 }

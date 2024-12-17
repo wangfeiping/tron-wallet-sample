@@ -47,4 +47,17 @@ public class TronController {
     }
   }
 
+  @GetMapping("address/{account}")
+  public MessageResult getNewAddress(@PathVariable String account) {
+    log.info("create new account={}", account);
+    try {
+      String address = tronService.createNewWallet(account, "a12345678!");
+      MessageResult result = new MessageResult(0, "success");
+      result.setData(address);
+      return result;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return MessageResult.error(500, "rpc error:" + e.getMessage());
+    }
+  }
 }

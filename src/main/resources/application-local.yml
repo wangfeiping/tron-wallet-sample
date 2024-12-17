@@ -3,8 +3,8 @@ coin:
   name: TRON_USDT
   unit: USDT
   keystore-path: ./keystore/
-  withdraw-wallet: UTC--2024-XXXXXX #提币钱包
-  withdraw-wallet-password: #提币钱包密码
+  withdraw-wallet: UTC--2024-12-17T13-08-46.644000000Z--TFWCgEouJUC1bHLMfjdzLQdXPeiCE1byfw #提币钱包
+  withdraw-wallet-password: a12345678! #提币钱包密码
 
 #####合约配置信息#####
 #CTT
