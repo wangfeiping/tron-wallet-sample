@@ -188,6 +188,26 @@ curl -XPOST https://nile.trongrid.io/wallet/triggerconstantcontract \
 
 # 相关资源以及参考资料
 
+## 测试网浏览器
+
+可查询区块，交易，账户等链上信息。需注意配置调用的测试网API 要使用相应的测试网浏览器。  
+**本项目统一使用 nile 测试网。**  
+
+[https://nile.tronscan.org/#/](https://nile.tronscan.org/#/)  
+
+## 水龙头
+
+波场为了防止诈骗所以无法部署自己的USDT 测试合约，需要到水龙头领水（测试资产）:
+
+[https://discord.com/channels/491685925227724801/999575963920781382](https://discord.com/channels/491685925227724801/999575963920781382)  
+
+发送消息即可:  
+
+* 领取测试网 TRX:  
+  **:> !nile TFWCgEouJUC1bHLMfjdzLQdXPeiCE1byfw**  
+* 领取测试网 USDT:  
+  **:> !nile_usdt TFWCgEouJUC1bHLMfjdzLQdXPeiCE1byfw**  
+
 ## 在线地址转换及ABI 编码工具
 
 调用合约方法需要将地址参数转换为以太坊格式，并且需要进行ABI 编码。  
@@ -205,11 +225,11 @@ curl -XPOST https://nile.trongrid.io/wallet/triggerconstantcontract \
 
 [https://abi.hashex.org/](https://abi.hashex.org/)  
 
-Function ( your function ) : balanceOf
-Argument ( Address ): 0x3CB540BBFA4F7143F2B8C3E185AEBAC6A5AF9C3E
-Encoded data: 70a082310000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e
+Function ( your function ) : balanceOf  
+Argument ( Address ): 0x3CB540BBFA4F7143F2B8C3E185AEBAC6A5AF9C3E  
+Encoded data: 70a082310000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e  
 
-截取地址参数编码部分即可: 0000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e
+截取地址参数编码部分即可: 0000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e  
 
 ## HTTP API 文档
 
