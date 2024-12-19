@@ -213,23 +213,23 @@ curl -XPOST https://nile.trongrid.io/wallet/triggerconstantcontract \
 调用合约方法需要将地址参数转换为以太坊格式，并且需要进行ABI 编码。  
 为了方便测试，使用在线工具直接转换并编码即可。  
 
-在线地址转换  
+* 在线地址转换  
+  [https://tronscan.org/#/tools/code-converter/tron-ethereum-address](https://tronscan.org/#/tools/code-converter/tron-ethereum-address)  
+  ```
+  波场地址: TFWCgEouJUC1bHLMfjdzLQdXPeiCE1byfw  
+  转换之后  
+  以太地址: 0x3CB540BBFA4F7143F2B8C3E185AEBAC6A5AF9C3E  
+  ```
 
-[https://tronscan.org/#/tools/code-converter/tron-ethereum-address](https://tronscan.org/#/tools/code-converter/tron-ethereum-address)  
+* 在线ABI 编码  
+  [https://abi.hashex.org/](https://abi.hashex.org/)  
+  ```
+  Function ( your function ) : balanceOf  
+  Argument ( Address ): 0x3CB540BBFA4F7143F2B8C3E185AEBAC6A5AF9C3E  
+  Encoded data: 70a082310000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e  
 
-波场地址: TFWCgEouJUC1bHLMfjdzLQdXPeiCE1byfw  
-转换之后  
-以太地址: 0x3CB540BBFA4F7143F2B8C3E185AEBAC6A5AF9C3E  
-
-在线ABI 编码
-
-[https://abi.hashex.org/](https://abi.hashex.org/)  
-
-Function ( your function ) : balanceOf  
-Argument ( Address ): 0x3CB540BBFA4F7143F2B8C3E185AEBAC6A5AF9C3E  
-Encoded data: 70a082310000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e  
-
-截取地址参数编码部分即可: 0000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e  
+  截取地址参数编码部分即可: 0000000000000000000000003cb540bbfa4f7143f2b8c3e185aebac6a5af9c3e  
+  ```
 
 ## HTTP API 文档
 
