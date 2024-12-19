@@ -42,14 +42,6 @@ public class TronWatcher extends Watcher {
   }
 
   @Override
-  public List<Deposit> replayBlock(Long start, Long end) {
-    List<Deposit> deposits = new ArrayList<>();
-
-    log.info("block replayed: TronApi.tronUrl={}; start={}; end={}", TronApi.tronUrl, start, end);
-    return deposits;
-  }
-
-  @Override
   public void checkBalance(){
     String withdrawAddress = tronService.getWithdrawAddress();
     log.info("checked withdraw account balance: {}; {}", withdrawAddress, TronUtils.toHexAddress(withdrawAddress));
@@ -64,6 +56,14 @@ public class TronWatcher extends Watcher {
   @Override
   public void run(){
     super.run();
+  }
+  
+  @Override
+  public List<Deposit> replayBlock(Long start, Long end) {
+    List<Deposit> deposits = new ArrayList<>();
+
+    log.info("block replayed: TronApi.tronUrl={}; start={}; end={}", TronApi.tronUrl, start, end);
+    return deposits;
   }
   
 }

@@ -42,7 +42,7 @@ public class TronController {
       result.setData(rpcBlockNumber);
       return result;
     } catch (Exception e) {
-      e.printStackTrace();
+      log.error(e.getMessage(), e);
       return MessageResult.error(500, "查询失败,error:" + e.getMessage());
     }
   }
@@ -56,8 +56,27 @@ public class TronController {
       result.setData(address);
       return result;
     } catch (Exception e) {
-      e.printStackTrace();
+      log.error(e.getMessage(), e);
       return MessageResult.error(500, "rpc error:" + e.getMessage());
+    }
+  }
+
+  /**
+   * 查询余额
+   *
+   * @param address
+   * @return
+   */
+  @GetMapping("balance/{address}")
+  public MessageResult addressBalance(@PathVariable String address) {
+    try {
+      BigDecimal balance = tronService.getBalance(address);
+      MessageResult result = new MessageResult(0, "success");
+      result.setData(balance);
+      return result;
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      return MessageResult.error(500, "查询失败，error:" + e.getMessage());
     }
   }
 }

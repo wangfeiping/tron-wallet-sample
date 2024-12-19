@@ -70,5 +70,13 @@ public class TronService {
     return address;
   }
 
+  public BigDecimal getBalance(String address) throws IOException {
+    String balanceStr = tronApi.getAccountBalance(address);
+    JSONObject balance = JSON.parseObject(balanceStr);
+    if (null != balance && balance.containsKey("balance")) {
+      return Convert.fromWei(balance.getLong("balance").toString(), Convert.Unit.ETHER);
+    }
+    return new BigDecimal(-1);
+  }
 }
 
