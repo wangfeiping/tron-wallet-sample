@@ -24,6 +24,7 @@ import org.tron.utils.TronUtils;
 import org.web3j.utils.Convert;
 
 import tron.wallet.entity.Coin;
+import tron.wallet.entity.Contract;
 import tron.wallet.util.AES;
 import tron.wallet.util.Wallet;
 
@@ -33,6 +34,7 @@ import tron.wallet.util.Wallet;
 public class TronService {
 
   @Autowired private Coin coin;
+  @Autowired private Contract contract;
   @Autowired private TronApi tronApi;
   
   public String getWithdrawAddress() {
@@ -74,7 +76,20 @@ public class TronService {
     String balanceStr = tronApi.getAccountBalance(address);
     JSONObject balance = JSON.parseObject(balanceStr);
     if (null != balance && balance.containsKey("balance")) {
-      return Convert.fromWei(balance.getLong("balance").toString(), Convert.Unit.ETHER);
+      return new BigDecimal(balance.getLong("balance"));
+    }
+    return new BigDecimal(-1);
+  }
+
+  public BigDecimal getBalanceOf(String address) throws IOException {
+    // String tAddr = TronUtils.toHexAddress(contract.getAddress());
+    // String tAddr = TronUtils.toViewAddress(contract.getAddress());
+    // String balanceStr = tronApi.getBalanceOf(address, tAddr);
+    String balanceStr = tronApi.getBalanceOf(address, contract.getAddress());
+    JSONObject balance = JSON.parseObject(balanceStr);
+    if (null != balance && balance.containsKey("constant_result")) {
+      String balanceHex = balance.getJSONArray("constant_result").getString(0);
+      return new BigDecimal(new BigInteger(balanceHex, 16));
     }
     return new BigDecimal(-1);
   }

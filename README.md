@@ -41,10 +41,17 @@ java -jar ./tron-sample-0.0.0-SNAPSHOT.jar --spring.profiles.active=local
       # curl -XGET http:/127.0.0.1:7004/tron/address/[request_id]  
       curl -XGET http:/127.0.0.1:7004/tron/address/000000  
   ```
-* 余额查询接口:  
+* TRX 余额查询接口:  
   ```shell
       # curl -XGET http://127.0.0.1:7004/tron/balance/[address]
       curl -XGET http://127.0.0.1:7004/tron/balance/TFWCgEouJUC1bHLMfjdzLQdXPeiCE1byfw
+      response: {"code":0,"message":"success","data":123000000}
+  ```
+* TRC20 余额查询接口:
+  ```shell
+      # curl -XGET http://127.0.0.1:7004/tron/balanceOf/[address]
+      curl -XGET http://127.0.0.1:7004/tron/balanceOf/TFWCgEouJUC1bHLMfjdzLQdXPeiCE1byfw
+      response: {"code":0,"message":"success","data":234000000}
   ```
 * 转账交易请求接口:  
   ```shell

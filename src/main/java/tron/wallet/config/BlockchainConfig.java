@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import lombok.extern.slf4j.Slf4j;
 
 import tron.wallet.entity.Coin;
+import tron.wallet.entity.Contract;
 import tron.wallet.entity.WatcherSetting;
 import org.tron.sdk.TronApi;
 
@@ -24,6 +25,14 @@ public class BlockchainConfig {
         Coin coin = new Coin();
         // log.info("Coin config: coin.name={}; coin.unit={}", coin.getName(), coin.getUnit());
         return coin;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "contract.address")
+    @ConfigurationProperties(prefix = "contract")
+    public Contract getContract(){
+        Contract contract = new Contract();
+        return contract;
     }
 
     @Bean

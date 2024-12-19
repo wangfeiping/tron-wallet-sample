@@ -62,7 +62,7 @@ public class TronController {
   }
 
   /**
-   * 查询余额
+   * 查询TRX 余额
    *
    * @param address
    * @return
@@ -71,6 +71,25 @@ public class TronController {
   public MessageResult addressBalance(@PathVariable String address) {
     try {
       BigDecimal balance = tronService.getBalance(address);
+      MessageResult result = new MessageResult(0, "success");
+      result.setData(balance);
+      return result;
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      return MessageResult.error(500, "查询失败，error:" + e.getMessage());
+    }
+  }
+
+  /**
+   * 查询TRC20 余额
+   *
+   * @param address
+   * @return
+   */
+  @GetMapping("balanceOf/{address}")
+  public MessageResult addressBalanceOf(@PathVariable String address) {
+    try {
+      BigDecimal balance = tronService.getBalanceOf(address);
       MessageResult result = new MessageResult(0, "success");
       result.setData(balance);
       return result;
