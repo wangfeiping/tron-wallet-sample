@@ -115,7 +115,7 @@ curl -X POST  https://nile.trongrid.io/wallet/getaccountbalance -d \
 
 ## 查询TRC20 余额
 
-需要转换地址格式并进行ABI 编码，请参考后面的 [在线地址转换及ABI 编码工具]()  
+需要转换地址格式并进行ABI 编码，请参考后面的 [在线地址转换及ABI 编码工具](#在线地址转换及abi-编码工具)  
 
 ```shell
 # request
